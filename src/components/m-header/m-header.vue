@@ -1,7 +1,7 @@
 <template>
   <div class="m-header">
-      <div class="icon"></div>
-      <h1 class="text">LazyCat music</h1>
+      <!-- <div class="icon"></div> -->
+      <h1 class="text">CC music</h1>
   </div>
 </template>
 

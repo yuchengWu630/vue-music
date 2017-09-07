@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     selectItem(item) {
-      console.log(item)
+      // console.log(item)
       this.$emit('select', item)
     },
     onShortcitTouchStart(e) {
@@ -84,6 +84,9 @@ export default {
       let delta = (this.touch.y2 - this.touch.y1) / ANCHOR_HEIGHT | 0
       let anchorIndex = parseInt(this.touch.anchorIndex) + delta
       this._scrollTo(anchorIndex)
+    },
+    refresh() {
+      this.$refs.listview.refresh()
     },
     scroll(pos) {
       this.scrollY = pos.y
@@ -184,7 +187,7 @@ export default {
           border-radius: 50%
         .name
           margin-left: 20px
-          color: $color-text-l
+          color: $color-text-ll
           font-size: $font-size-medium
     .list-shortcut
       position: absolute

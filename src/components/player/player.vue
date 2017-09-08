@@ -95,7 +95,7 @@
       </div>
     </transition>
     <playlist ref="playlist"></playlist>
-    <audio ref="audio" :src="currentSong.url" @canplay="ready" @error="error" @timeupdate="updataTime" @ended="end"></audio>
+    <audio ref="audio" :src="currentSong.url" @play="ready" @error="error" @timeupdate="updataTime" @ended="end"></audio>
   </div>
 </template>
 
@@ -124,7 +124,9 @@ export default {
       currentLyric: null,
       currentLineNum: 0,
       currentShow: 'cd',
-      playingLyric: ''
+      playingLyric: '',
+      // 考虑到不同平台 可以判断运行环境设定歌词获取时机
+      getLyricTime: 20
     }
   },
   computed: {
@@ -225,7 +227,7 @@ export default {
       this.$refs.audio.currentTime = 0
       this.$refs.audio.play()
       if (this.currentLyric) {
-        this.currentLyric.seek()
+        this.currentLyric.seek(0)
       }
     },
     next() {
@@ -234,6 +236,7 @@ export default {
       }
       if (this.playlist.length === 1) {
         this.loop()
+        return
       } else {
         let index = this.currentIndex + 1
         // console.log(index)
@@ -421,13 +424,17 @@ export default {
       }
       if (this.currentLyric) {
         this.currentLyric.stop()
+        this.currentTime = 0
+        this.playingLyric = ''
+        this.currentLineNum = 0
       }
-      setTimeout(() => {
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
         this.$refs.audio.play()
         // console.log(this.currentSong)
         this.getLyric()
         // this.setPlayingState(true)
-      }, 1000)
+      }, this.getLyricTime)
     },
     playing (newPlaying) {
       // console.log(newPlaying)

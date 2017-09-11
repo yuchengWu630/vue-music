@@ -369,7 +369,7 @@ export default {
         if (this.touch.percent === '1.00') {
           return
         }
-        if (this.touch.percent > 0.1 && this.touch.percent !== 1) {
+        if (this.touch.percent > 0.1) {
           offsetwidth = 0
           this.currentShow = 'cd'
           opacity = 1

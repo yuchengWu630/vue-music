@@ -11,7 +11,9 @@ export function getRecommend() {
   })
   return getJSON(url, data, options)
 }
+export function getJsonSongList(data) {
 
+}
 export function getDiscList() {
   const url = '/api/getDiscList'
 
@@ -35,18 +37,29 @@ export function getDiscList() {
 }
 
 export function getSongList(disstid) {
-  const url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
+  const url = '/api/getSongList'
   const data = (() => {
     return {
       ...commonParams,
+      g_tk: 5381,
       disstid,
       type: 1,
       json: 1,
       utf8: 1,
       onlysong: 0,
+      format: 'jsonp',
+      loginUin: 0,
+      hostUin: 0,
+      inCharset: 'utf8',
+      outCharset: 'utf-8',
+      notice: 0,
       platform: 'yqq',
-      hostUin: 0
+      needNewCode: 0
     }
   })()
-  return getJSON(url, data, options)
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  })
 }

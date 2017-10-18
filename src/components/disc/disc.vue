@@ -28,7 +28,7 @@ export default {
       songs: []
     }
   },
-  created() {
+  mounted() {
     this._getSongList()
   },
   methods: {
@@ -38,7 +38,9 @@ export default {
         return
       }
       getSongList(this.disc.dissid).then((res) => {
-        // console.log(res)
+        // res = res.substring(0, res.length - 1)
+        res = res.slice(13, res.length - 1)
+        res = JSON.parse(res)
         if (res.code === ERR_OK) {
           this.songs = this._normalizeSongs(res.cdlist[0].songlist)
         }

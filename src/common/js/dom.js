@@ -22,7 +22,7 @@ export function getData(el, name, val) {
   }
 }
 
-// 能力坚持
+// 能力检查
 let elementStyle = document.createElement('div').style
 
 // 浏览器供应商

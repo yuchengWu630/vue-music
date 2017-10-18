@@ -62,6 +62,8 @@ export default {
       background: $color-highlight-background
       color: $color-text
       font-size: $font-size-medium
+      .box:focus
+        background:#f00
       &::placeholder
         color: $color-text-d
     .icon-dismiss
